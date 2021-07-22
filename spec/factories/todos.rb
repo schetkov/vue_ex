@@ -1,6 +1,8 @@
 FactoryBot.define do
   factory :todo do
     title { 'MyString' }
-    description { 'MyText' }
+    status { false }
+    user { nil }
+    user_group { nil }
   end
 end

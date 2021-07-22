@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_210_722_070_220) do
+ActiveRecord::Schema.define(version: 20_210_722_073_527) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
+
+  create_table 'todos', force: :cascade do |t|
+    t.string 'title'
+    t.boolean 'status'
+    t.integer 'ownerable_id'
+    t.string 'ownerable_type'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index %w[ownerable_type ownerable_id], name: 'index_todos_on_ownerable_type_and_ownerable_id'
+  end
 
   create_table 'user_group_users', force: :cascade do |t|
     t.bigint 'user_id', null: false
