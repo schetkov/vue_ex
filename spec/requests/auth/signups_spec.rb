@@ -7,7 +7,7 @@ RSpec.describe 'Auth:Signup', type: :request do
     end
 
     it 'returns http success' do
-      post '/auth/sign_up', params: user_params
+      post auth_sign_up_path, params: user_params
       expect(response).to be_successful
       expect(response_json.keys).to eq ['csrf']
       expect(response.cookies[JWTSessions.access_cookie]).to be_present
@@ -15,7 +15,7 @@ RSpec.describe 'Auth:Signup', type: :request do
 
     it 'creates a new user' do
       expect do
-        post '/auth/sign_up', params: user_params
+        post auth_sign_up_path, params: user_params
       end.to change(User, :count).by(1)
     end
   end

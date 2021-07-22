@@ -5,6 +5,6 @@ class ApplicationController < ActionController::API
   private
 
   def reject_unauthorized
-    render json: { error: 'unauthorized' }, status: 403
+    render json: { error: 'Unauthorized' }, status: 401
   end
 end

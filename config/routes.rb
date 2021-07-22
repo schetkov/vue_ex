@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   namespace :auth do
     post '/sign_up', to: 'signup#sign_up'
     post '/sign_in', to: 'signin#sign_in'
+    post '/refresh_token', to: 'refresh#refresh_token'
   end
 end
