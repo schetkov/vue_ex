@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :user_group do
-    title { "MyString" }
+    title { 'MyString' }
   end
 end

@@ -10,34 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_22_070220) do
-
+ActiveRecord::Schema.define(version: 20_210_722_070_220) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "user_group_users", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "user_group_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_group_id"], name: "index_user_group_users_on_user_group_id"
-    t.index ["user_id"], name: "index_user_group_users_on_user_id"
+  create_table 'user_group_users', force: :cascade do |t|
+    t.bigint 'user_id', null: false
+    t.bigint 'user_group_id', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['user_group_id'], name: 'index_user_group_users_on_user_group_id'
+    t.index ['user_id'], name: 'index_user_group_users_on_user_id'
   end
 
-  create_table "user_groups", force: :cascade do |t|
-    t.string "title"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'user_groups', force: :cascade do |t|
+    t.string 'title'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "email", null: false
-    t.string "password_digest", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'users', force: :cascade do |t|
+    t.string 'name', null: false
+    t.string 'email', null: false
+    t.string 'password_digest', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  add_foreign_key "user_group_users", "user_groups"
-  add_foreign_key "user_group_users", "users"
+  add_foreign_key 'user_group_users', 'user_groups'
+  add_foreign_key 'user_group_users', 'users'
 end
