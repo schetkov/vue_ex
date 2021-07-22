@@ -1,26 +1,32 @@
 module Auth
-  class SignupController < ApplicationController
-    def sign_up
-      user = User.new(user_params)
-      if user.save
+  class SigninController < ApplicationController
+    rescue_from ActiveRecord::RecordNotFound, with: :not_found
+
+    def sign_in
+      user = User.find_by!(email: params[:email])
+      if user.authenticate(params[:password])
         payload = { user_id: user.id }
         session = JWTSessions::Session.new(payload: payload, refresh_by_access_allowed: true)
         token = session.login
-
         response.set_cookie(JWTSessions.access_cookie,
                             value: token[:access],
                             httponly: true,
                             secure: Rails.env.production?)
+
         render json: { csrf: token[:csrf] }
       else
-        render json: { error: user.errors.full_messages.join(' ') }, status: 422
+        not_authorized
       end
     end
 
     private
 
-    def user_params
-      params.permit(:name, :email, :password, :password_confirmation)
+    def not_found
+      render json: { error: 'Not found' }, status: 404
+    end
+
+    def not_authorized
+      render json: { error: 'Not authorized' }, status: 401
     end
   end
 end
