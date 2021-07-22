@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :todo do
-    title { 'MyString' }
-    status { false }
-    ownerable_id { nil }
-    ownerable_type { nil }
+    title { 'MyTODO' }
+    status { 'Created' }
+    ownerable_id { ownerable_id }
+    ownerable_type { ownerable_id }
   end
 end

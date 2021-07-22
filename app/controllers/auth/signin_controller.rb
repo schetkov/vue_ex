@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Auth
   class SigninController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
@@ -17,6 +19,12 @@ module Auth
       else
         not_authorized
       end
+    end
+
+    def sign_out
+      session = JWTSessions::Session.new(payload: payload)
+      session.flush_by_access_payload
+      render json: :ok
     end
 
     private
