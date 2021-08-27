@@ -21,6 +21,10 @@ Bundler.require(*Rails.groups)
 
 module VueEx
   class Application < Rails::Application
+    
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
+    config.middleware.insert_after(ActionDispatch::Cookies, ActionDispatch::Session::CookieStore)
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 

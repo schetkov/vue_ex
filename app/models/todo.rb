@@ -8,5 +8,5 @@ class Todo < ApplicationRecord
   scope :by_owner_params, -> (params) { where(params) }
 
 
-  validates :title, :status, presence: true
+  validates :title, presence: true
 end

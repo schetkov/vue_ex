@@ -5,7 +5,7 @@ class TodosController < ApplicationController
 
   # GET /todos
   def index
-    @todos = Todo.by_owner_params(owner_params)
+    @todos = current_user.todos
     render json: @todos
   end
 
@@ -16,8 +16,7 @@ class TodosController < ApplicationController
 
   # POST /todos
   def create
-    @todo = Todo.new(todo_params)
-
+    @todo = Todo.new(todo_params.merge!({ownerable: current_user}))
     if @todo.save
       render json: @todo, status: :created, location: @todo
     else

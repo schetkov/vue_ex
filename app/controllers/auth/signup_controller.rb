@@ -13,7 +13,7 @@ module Auth
                             value: token[:access],
                             httponly: true,
                             secure: Rails.env.production?)
-        render json: { csrf: token[:csrf] }
+        render json: { csrf: token[:csrf], access: token[:access]}
       else
         render json: { error: user.errors.full_messages.join(' ') }, status: 422
       end

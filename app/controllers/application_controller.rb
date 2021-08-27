@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
+
+  # include ActionController::RequestForgeryProtection
+  # protect_from_forgery with: :exception, unless: -> { request.format.json? }
+
   include JWTSessions::RailsAuthorization
   rescue_from JWTSessions::Errors::Unauthorized, with: :reject_unauthorized
 

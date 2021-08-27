@@ -15,7 +15,7 @@ module Auth
                             httponly: true,
                             secure: Rails.env.production?)
 
-        render json: { csrf: token[:csrf] }
+        render json: { csrf: token[:csrf], access: token[:access]}
       else
         not_authorized
       end
